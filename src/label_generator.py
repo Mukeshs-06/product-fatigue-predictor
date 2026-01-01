@@ -1,9 +1,6 @@
 import pandas as pd
 import numpy as np
 
-# -----------------------------
-# CONFIG
-# -----------------------------
 RAW_DATA_PATH = "data/raw/products.csv"
 OUTPUT_PATH = "data/processed/labeled_products.csv"
 
@@ -57,7 +54,7 @@ def generate_labels(df):
 
     for sku, sku_df in df.groupby('SKU'):
         if len(sku_df) < RECENT_DAYS * 2:
-            continue  # not enough data
+            continue  
 
         recent = sku_df.tail(RECENT_DAYS)['daily_qty'].mean()
         previous = sku_df.iloc[-(RECENT_DAYS*2):-RECENT_DAYS]['daily_qty'].mean()
