@@ -1,8 +1,5 @@
 import pandas as pd
 
-# -----------------------------
-# CONFIG
-# -----------------------------
 INPUT_PATH = "data/processed/labeled_products.csv"
 OUTPUT_PATH = "data/processed/preprocessed_data.csv"
 
@@ -19,12 +16,8 @@ def load_data(path):
 
 
 def basic_cleaning(df):
-    # Drop duplicates if any
     df = df.drop_duplicates()
-
-    # Drop rows with missing target
     df = df.dropna(subset=["product_status"])
-
     return df
 
 
