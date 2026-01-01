@@ -6,9 +6,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, f1_score
 
-# -----------------------------
-# CONFIG
-# -----------------------------
 DATA_PATH = "data/processed/features.csv"
 MODEL_OUTPUT_PATH = "models/fatigue_model.pkl"
 RANDOM_STATE = 42
