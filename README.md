@@ -134,7 +134,7 @@ The project is fully deployed:
 * Free cloud deployment
 
 🔗 **API Docs:**
-👉 [https://YOUR-RENDER-URL.onrender.com/docs](https://YOUR-RENDER-URL.onrender.com/docs)
+👉 [https://product-fatigue-api.onrender.com/docs](https://product-fatigue-api.onrender.com/docs)
 
 ---
 
@@ -145,7 +145,7 @@ The project is fully deployed:
 * Allows anyone to test predictions interactively
 
 🔗 **UI:**
-👉 [https://YOUR-STREAMLIT-URL.streamlit.app](https://YOUR-STREAMLIT-URL.streamlit.app)
+👉 [https://fatigue-predictor.streamlit.app/](https://fatigue-predictor.streamlit.app/)
 
 ---
 
