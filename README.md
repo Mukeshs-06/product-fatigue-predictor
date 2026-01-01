@@ -1,3 +1,9 @@
+# 📦 Product Fatigue Predictor
+
+> An end-to-end Machine Learning project that detects whether a product is **Trending**, **Stable**, or **Fatiguing** based on sales behavior — from raw data to a deployed UI.
+
+---
+
 ## 👋 What is this project about?
 
 In real businesses, one common question is:
