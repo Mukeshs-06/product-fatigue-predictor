@@ -1,28 +1,68 @@
 from fastapi import FastAPI
 import joblib
 import numpy as np
+import os
+import pandas as pd
+
+from sklearn.ensemble import RandomForestClassifier
 
 # -----------------------------
-# LOAD MODEL
+# PATHS
 # -----------------------------
 MODEL_PATH = "models/fatigue_model.pkl"
+DATA_PATH = "data/processed/features.csv"
 
-model = joblib.load(MODEL_PATH)
-
-# Class mapping
+# -----------------------------
+# CLASS MAP
+# -----------------------------
 CLASS_MAP = {
     0: "Fatiguing",
     1: "Stable",
     2: "Trending"
 }
 
+# -----------------------------
+# FASTAPI APP
+# -----------------------------
 app = FastAPI(
     title="Product Fatigue Predictor",
     description="Predicts whether a product is Trending, Stable, or Fatiguing",
     version="1.0"
 )
 
+# -----------------------------
+# TRAIN MODEL IF NEEDED
+# -----------------------------
+def train_and_save_model():
+    df = pd.read_csv(DATA_PATH)
 
+    X = df.drop("target", axis=1)
+    y = df["target"]
+
+    model = RandomForestClassifier(
+        n_estimators=200,
+        random_state=42,
+        class_weight="balanced"
+    )
+    model.fit(X, y)
+
+    os.makedirs("models", exist_ok=True)
+    joblib.dump(model, MODEL_PATH)
+
+    return model
+
+
+# -----------------------------
+# LOAD OR TRAIN MODEL
+# -----------------------------
+if os.path.exists(MODEL_PATH):
+    model = joblib.load(MODEL_PATH)
+else:
+    model = train_and_save_model()
+
+# -----------------------------
+# ROUTES
+# -----------------------------
 @app.get("/")
 def home():
     return {"message": "Product Fatigue Prediction API is running"}
@@ -43,7 +83,7 @@ def predict(data: dict):
     prediction = model.predict(features)[0]
     label = CLASS_MAP[prediction]
 
-    message = {
+    explanation = {
         "Fatiguing": "Product is losing sales momentum",
         "Stable": "Product performance is stable",
         "Trending": "Product demand is increasing"
@@ -51,5 +91,5 @@ def predict(data: dict):
 
     return {
         "prediction": label,
-        "confidence_note": message[label]
+        "confidence_note": explanation[label]
     }
