@@ -6,33 +6,22 @@ import pandas as pd
 
 from sklearn.ensemble import RandomForestClassifier
 
-# -----------------------------
-# PATHS
-# -----------------------------
 MODEL_PATH = "models/fatigue_model.pkl"
 DATA_PATH = "data/processed/features.csv"
 
-# -----------------------------
-# CLASS MAP
-# -----------------------------
 CLASS_MAP = {
     0: "Fatiguing",
     1: "Stable",
     2: "Trending"
 }
 
-# -----------------------------
 # FASTAPI APP
-# -----------------------------
 app = FastAPI(
     title="Product Fatigue Predictor",
     description="Predicts whether a product is Trending, Stable, or Fatiguing",
     version="1.0"
 )
 
-# -----------------------------
-# TRAIN MODEL IF NEEDED
-# -----------------------------
 def train_and_save_model():
     df = pd.read_csv(DATA_PATH)
 
@@ -51,18 +40,15 @@ def train_and_save_model():
 
     return model
 
-
-# -----------------------------
 # LOAD OR TRAIN MODEL
-# -----------------------------
+
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
 else:
     model = train_and_save_model()
 
-# -----------------------------
 # ROUTES
-# -----------------------------
+
 @app.get("/")
 def home():
     return {"message": "Product Fatigue Prediction API is running"}
