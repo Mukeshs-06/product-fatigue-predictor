@@ -15,7 +15,6 @@ def load_data(path):
 def create_features(df):
     df = df.copy()
 
-    # Avoid divide-by-zero
     df["sales_ratio"] = df["recent_avg_sales"] / (df["previous_avg_sales"] + 1)
 
     df["sales_diff"] = df["recent_avg_sales"] - df["previous_avg_sales"]
