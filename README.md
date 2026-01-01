@@ -199,3 +199,8 @@ This project focuses on:
 It reflects how machine learning is actually used in practice.
 
 ---
+### 🌐 Live API
+The model is deployed on Render (free tier):
+
+🔗 https://product-fatigue-api.onrender.com/docs
+
